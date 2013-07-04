@@ -15,4 +15,5 @@
 /tmp
 /public/system
 /config/database.yml
+/config/initializers/vkontakte_api.rb.sample
 .rvmrc
