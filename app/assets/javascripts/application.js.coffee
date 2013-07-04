@@ -10,10 +10,11 @@
 # Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 # about supported directives.
 #
-#= require jquery
 #= require jquery_ujs
 #= require twitter/bootstrap
 #= require turbolinks
+#= require jquery-tmpl
+#= require_tree ./templates
 #= require_tree .
 
 
@@ -26,28 +27,29 @@ $(document).ready ->
     dataType: "JSON"
     beforeSend: ->
       content.addClass("preloader")
-    success: (response) -> 
+    success: (albums) -> 
       content.removeClass("preloader")
+
+      $.each albums, (i) ->
+        $.tmpl("templates/album", { thumb_src: albums[i].thumb_src, aid: albums[i].aid  })
+         .hide().appendTo("#content").fadeIn()
       
-
-
-
-
   
-  # $('body').on 'click', '.add_to_playlist', () ->
-  #   button  = $(this)
-  #   videoId = button.attr 'data-id'
-  #   $.ajax(
-  #     type: "POST"
-  #     url: "/playlist/add/"
-  #     dataType: "JSON"
-  #     data:
-  #       video_id: videoId
-  #   ).done (response) ->
-  #     unless response.error
-  #       button.hide()
-  #       FrontendNotifier.show response
-  #     else
-  #       FrontendNotifier.show response 
+  $('body').on 'click', '.album a', (e) ->
+    e.preventDefault()
+    $.ajax
+      url: $(this).attr("href")
+      dataType: "JSON"
+      beforeSend: ->
+        content.empty()
+        content.addClass("preloader")
+      success: (photos) -> 
+        content.removeClass("preloader")
+        console.log(photos)
+
+        $.each photos, (i) ->
+          $.tmpl("templates/photo", { src_big: photos[i].src_big, text: photos[i].text  })
+           .hide().appendTo("#content").fadeIn(1000)
+
 
 

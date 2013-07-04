@@ -19,6 +19,8 @@
 
   #content { min-height: 200px;
     &.preloader { background: url(preloader.png) center center no-repeat }
+    .album { margin-top: 30px; height: 200px; }
+    .photo { margin-top: 30px; height: 128px; overflow: hidden }
   }
 
 }
