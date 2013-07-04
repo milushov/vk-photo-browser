@@ -11,3 +11,10 @@
  *= require_self
  *= require_tree .
  */
+
+.main { padding: 30px; 
+
+  .user_photo { max-height: 170px; }
+  .name { padding-top: 50px; }
+
+}

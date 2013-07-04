@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
     def current_user
       @vk   = VkontakteApi::Client.new(session[:token])
-      @user = @vk.users.get(uid: session[:vk_id], fields: [:screen_name, :photo]).first
+      @user = @vk.users.get(uid: session[:vk_id], fields: [:screen_name, :photo_big]).first
     end
 
 end

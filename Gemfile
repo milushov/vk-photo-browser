@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'vkontakte_api', '~> 1.1'
 gem 'haml-rails'
+gem "twitter-bootstrap-rails"
 
 group :development, :test do
   gem 'rspec-rails'
