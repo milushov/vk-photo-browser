@@ -5,6 +5,10 @@ class AlbumsController < ApplicationController
 
   def index
     @albums = @vk.photos.get_albums(uid: @user.uid, need_covers: 1).first
+
+    respond_to do |format|
+      format.json { render json: @albums.to_json }
+    end
   end
   
 end

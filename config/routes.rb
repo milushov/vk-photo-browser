@@ -10,5 +10,5 @@ VkPhotoBrowser::Application.routes.draw do
 
   resources :albums, only: [:index, :show]
 
-  root 'albums#index'
+  root 'home#index'
 end

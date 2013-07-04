@@ -17,4 +17,8 @@
   .user_photo { max-height: 170px; }
   .name { padding-top: 50px; }
 
+  #content { min-height: 200px;
+    &.preloader { background: url(preloader.png) center center no-repeat }
+  }
+
 }
