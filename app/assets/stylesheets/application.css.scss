@@ -18,7 +18,7 @@
   .name { padding-top: 50px; }
 
   #content { min-height: 200px;
-    &.preloader { background: image-url("preloader.png") center center no-repeat }
+    &.preloader { background: image-url("preloader.gif") center center no-repeat }
     .album { margin-top: 30px; height: 200px; }
     .photo { margin-top: 30px; height: 128px; overflow: hidden }
   }
