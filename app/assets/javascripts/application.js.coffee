@@ -45,8 +45,7 @@ $(document).ready ->
         content.addClass("preloader")
       success: (photos) -> 
         content.removeClass("preloader")
-        console.log(photos)
-
+        
         $.each photos, (i) ->
           $.tmpl("templates/photo", { src_big: photos[i].src_big, text: photos[i].text  })
            .hide().appendTo("#content").fadeIn(1000)
