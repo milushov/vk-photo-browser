@@ -17,20 +17,21 @@
 #= require_tree ./templates
 #= require_tree .
 
-  
+load_albums = (content) ->
+  $.ajax
+    url: "/albums"
+    dataType: "JSON"
+    beforeSend: ->
+      content.addClass("preloader")
+    success: (albums) -> 
+      content.removeClass("preloader")
+      $.tmpl("templates/album", albums).hide().appendTo("#content").fadeIn(500)
+
+
 content = $("#content")
+document.addEventListener("page:fetch", load_albums(content))
 
-$.ajax
-  url: "/albums"
-  dataType: "JSON"
-  beforeSend: ->
-    content.addClass("preloader")
-  success: (albums) -> 
-    content.removeClass("preloader")
-    $.tmpl("templates/album", albums).hide().appendTo("#content").fadeIn(500)
-  
-
-$(document).on 'click', '.album a', (e) ->
+$("body").on 'click', '.album a', (e) ->
   e.preventDefault()
   $.ajax
     url: $(this).attr("href")
@@ -42,6 +43,9 @@ $(document).on 'click', '.album a', (e) ->
       content.removeClass("preloader")
       $("#user_name").wrapInner('<a href="/" />')
       $.tmpl("templates/photo", photos).hide().appendTo("#content").fadeIn(500)
+
+
+    
 
 
 
