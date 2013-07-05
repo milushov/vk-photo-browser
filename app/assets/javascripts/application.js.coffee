@@ -17,38 +17,38 @@
 #= require_tree ./templates
 #= require_tree .
 
+  
+content = $("#content")
 
-$(document).ready ->
+$.ajax
+  url: "/albums"
+  dataType: "JSON"
+  beforeSend: ->
+    content.addClass("preloader")
+  success: (albums) -> 
+    content.removeClass("preloader")
 
-  content = $("#content")
+    $.each albums, (i) ->
+      $.tmpl("templates/album", { thumb_src: albums[i].thumb_src, aid: albums[i].aid  })
+       .hide().appendTo("#content").fadeIn()
+    
 
+$(document).on 'click', '.album a', (e) ->
+  e.preventDefault()
   $.ajax
-    url: "/albums"
+    url: $(this).attr("href")
     dataType: "JSON"
     beforeSend: ->
+      content.empty()
       content.addClass("preloader")
-    success: (albums) -> 
+    success: (photos) -> 
       content.removeClass("preloader")
+      $("#user_name").wrapInner('<a href="/" />')
+      $.each photos, (i) ->
+        $.tmpl("templates/photo", { src_big: photos[i].src_big, text: photos[i].text  })
+         .hide().appendTo("#content").fadeIn(1000)
 
-      $.each albums, (i) ->
-        $.tmpl("templates/album", { thumb_src: albums[i].thumb_src, aid: albums[i].aid  })
-         .hide().appendTo("#content").fadeIn()
-      
-  
-  $('body').on 'click', '.album a', (e) ->
-    e.preventDefault()
-    $.ajax
-      url: $(this).attr("href")
-      dataType: "JSON"
-      beforeSend: ->
-        content.empty()
-        content.addClass("preloader")
-      success: (photos) -> 
-        content.removeClass("preloader")
-        
-        $.each photos, (i) ->
-          $.tmpl("templates/photo", { src_big: photos[i].src_big, text: photos[i].text  })
-           .hide().appendTo("#content").fadeIn(1000)
+
 
 
 

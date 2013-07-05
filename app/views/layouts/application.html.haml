@@ -21,7 +21,7 @@
         .span12
           .span2.user_photo= image_tag @user.photo_big, class: "img-circle"
           .span5.name
-            %h1= "#{@user.first_name} #{@user.last_name}"
+            %h1#user_name= "#{@user.first_name} #{@user.last_name}"
 
           .span12#content
             = yield
