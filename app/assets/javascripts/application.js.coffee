@@ -27,11 +27,8 @@ $.ajax
     content.addClass("preloader")
   success: (albums) -> 
     content.removeClass("preloader")
-
-    $.each albums, (i) ->
-      $.tmpl("templates/album", { thumb_src: albums[i].thumb_src, aid: albums[i].aid  })
-       .hide().appendTo("#content").fadeIn()
-    
+    $.tmpl("templates/album", albums).hide().appendTo("#content").fadeIn(500)
+  
 
 $(document).on 'click', '.album a', (e) ->
   e.preventDefault()
@@ -44,9 +41,7 @@ $(document).on 'click', '.album a', (e) ->
     success: (photos) -> 
       content.removeClass("preloader")
       $("#user_name").wrapInner('<a href="/" />')
-      $.each photos, (i) ->
-        $.tmpl("templates/photo", { src_big: photos[i].src_big, text: photos[i].text  })
-         .hide().appendTo("#content").fadeIn(1000)
+      $.tmpl("templates/photo", photos).hide().appendTo("#content").fadeIn(500)
 
 
 
